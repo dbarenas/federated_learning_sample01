@@ -19,11 +19,12 @@ def test_parameter_exchange():
     
     # Get initial params
     initial_params = get_parameters(model)
+    initial_params_copy = [p.copy() for p in initial_params]
     assert len(initial_params) > 0
     assert isinstance(initial_params[0], np.ndarray)
     
     # Perturb parameters slightly to simulate update
-    new_params = [p + 0.01 for p in initial_params]
+    new_params = [p + 1.0 for p in initial_params]
     
     # Set parameters
     set_parameters(model, new_params)
@@ -31,4 +32,4 @@ def test_parameter_exchange():
     # Check if updated
     current_params = get_parameters(model)
     assert np.allclose(current_params[0], new_params[0])
-    assert not np.allclose(current_params[0], initial_params[0])
+    assert not np.allclose(current_params[0], initial_params_copy[0])
