@@ -40,17 +40,17 @@ def set_parameters(model, parameters: List[np.ndarray]):
     """Set the parameters of the model from a list of numpy arrays (from Flower server).
     Only sets the LoRA parameters + classifier head if trainable.
     """
-    params_dict = zip(model.state_dict().keys(), parameters)
-    state_dict = OrderedDict({k: torch.Tensor(v) for k, v in params_dict})
-    
-    # We only want to load the keys that are present in the state_dict matching the model
-    # FL usually sends all parameters if we sent all parameters.
-    # But here we should be careful to only update trainable ones if we filtered earlier.
-    # simpler approach: strict=True if we are consistent.
-    
-    # However, in this simple implementation, we assume we pass EVERYTHING that we extracted.
-    model.load_state_dict(state_dict, strict=True)
+    trainable_keys = [
+        name for name, _ in model.state_dict().items() if "lora" in name or "classifier" in name
+    ]
+    params_dict = zip(trainable_keys, parameters)
+    state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
+    model.load_state_dict(state_dict, strict=False)
 
 def get_parameters(model) -> List[np.ndarray]:
     """Get the parameters of the model as a list of numpy arrays (for Flower server)."""
-    return [val.cpu().numpy() for _, val in model.state_dict().items()]
+    return [
+        val.cpu().numpy()
+        for name, val in model.state_dict().items()
+        if "lora" in name or "classifier" in name
+    ]

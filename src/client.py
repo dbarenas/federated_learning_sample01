@@ -6,7 +6,8 @@ import flwr as fl
 import torch
 import numpy as np
 from torch.utils.data import DataLoader
-from transformers import DataCollatorWithPadding, AdamW
+from torch.optim import AdamW
+from transformers import DataCollatorWithPadding
 from tqdm import tqdm
 from sklearn.metrics import accuracy_score
 
