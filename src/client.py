@@ -10,7 +10,12 @@ from torch.optim import AdamW
 from transformers import DataCollatorForTokenClassification
 from tqdm import tqdm
 
-from .common import load_model, set_parameters, get_parameters, get_device
+from .common import (
+    load_model,
+    set_lora_parameters,
+    get_lora_parameters,
+    get_device,
+)
 from .data_preparation import extract_and_prepare_data
 from .config import Config
 
@@ -109,11 +114,11 @@ class FlowerClient(fl.client.NumPyClient):
 
     def get_parameters(self, config):
         """Return current model weights."""
-        return get_parameters(self.model)
+        return get_lora_parameters(self.model)
 
     def fit(self, parameters, config):
         """Train the model using the parameters from the server."""
-        set_parameters(self.model, parameters)
+        set_lora_parameters(self.model, parameters)
 
         train_loader = DataLoader(
             self.train_dataset,
@@ -134,11 +139,11 @@ class FlowerClient(fl.client.NumPyClient):
                 optimizer.step()
                 optimizer.zero_grad()
 
-        return get_parameters(self.model), len(self.train_dataset), {}
+        return get_lora_parameters(self.model), len(self.train_dataset), {}
 
     def evaluate(self, parameters, config):
         """Evaluate the model using parameters from the server."""
-        set_parameters(self.model, parameters)
+        set_lora_parameters(self.model, parameters)
 
         test_loader = DataLoader(
             self.test_dataset,
@@ -168,7 +173,7 @@ def main():
     parser.add_argument(
         "--client-id", type=str, default="1", help="Client ID"
     )
-    parser.add_gument(
+    parser.add_argument(
         "--server-address",
         type=str,
         default=Config.SERVER_ADDRESS,

@@ -1,0 +1,59 @@
+Some weights of LayoutLMForTokenClassification were not initialized from the model checkpoint at microsoft/layoutlm-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Starting Client 1 connecting to 127.0.0.1:8080
+trainable params: 447,751 || all params: 113,081,102 || trainable%: 0.3960
+Loading data from /app/src/data_generation...
+Map:   0%|          | 0/16 [00:00<?, ? examples/s]Map: 100%|██████████| 16/16 [00:00<00:00, 354.83 examples/s]
+Map:   0%|          | 0/4 [00:00<?, ? examples/s]Map: 100%|██████████| 4/4 [00:00<00:00, 209.45 examples/s]
+[93mWARNING [0m:   DEPRECATED FEATURE: flwr.client.start_numpy_client() is deprecated.
+	Instead, use `flwr.client.start_client()` by ensuring you first call the `.to_client()` method as shown below:
+	flwr.client.start_client(
+		server_address='<IP>:<PORT>',
+		client=FlowerClient().to_client(), # <-- where FlowerClient is of type flwr.client.NumPyClient object
+	)
+	Using `start_numpy_client()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+
+[93mWARNING [0m:   DEPRECATED FEATURE: flwr.client.start_client() is deprecated.
+	Instead, use the `flower-supernode` CLI command to start a SuperNode as shown below:
+
+		$ flower-supernode --insecure --superlink='<IP>:<PORT>'
+
+	To view all available options, run:
+
+		$ flower-supernode --help
+
+	Using `start_client()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+
+[92mINFO [0m:
+[92mINFO [0m:      Received: get_parameters message da73eedc-ef36-4038-b8b1-ef9f8a0b30ab
+[92mINFO [0m:      Sent reply
+[92mINFO [0m:
+[92mINFO [0m:      Received: train message aa311d89-dbf5-497d-ab40-d6a3d0cd52ee
+Epoch 1:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 1:  50%|█████     | 1/2 [00:14<00:14, 14.30s/it]Epoch 1: 100%|██████████| 2/2 [00:28<00:00, 14.18s/it]Epoch 1: 100%|██████████| 2/2 [00:28<00:00, 14.20s/it]
+[92mINFO [0m:      Sent reply
+[92mINFO [0m:
+[92mINFO [0m:      Received: evaluate message de766059-ad63-4221-8606-c6c9c51213f1
+[92mINFO [0m:      Sent reply
+[92mINFO [0m:
+[92mINFO [0m:      Received: train message 0fe5aaca-0f3c-4121-9dbc-0e2073e263ef
+Epoch 1:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 1:  50%|█████     | 1/2 [00:14<00:14, 14.92s/it]Epoch 1: 100%|██████████| 2/2 [00:29<00:00, 14.72s/it]Epoch 1: 100%|██████████| 2/2 [00:29<00:00, 14.75s/it]
+[92mINFO [0m:      Sent reply
+[92mINFO [0m:
+[92mINFO [0m:      Received: evaluate message 6fedc5e9-0a16-4deb-8ef3-986b78e7abd8
+[92mINFO [0m:      Sent reply
+[92mINFO [0m:
+[92mINFO [0m:      Received: train message 1f650f10-58a7-4e4e-bc55-810c00103b0d
+Epoch 1:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 1:  50%|█████     | 1/2 [00:16<00:16, 16.73s/it]Epoch 1: 100%|██████████| 2/2 [00:31<00:00, 15.40s/it]Epoch 1: 100%|██████████| 2/2 [00:31<00:00, 15.60s/it]
+[92mINFO [0m:      Sent reply
+[92mINFO [0m:
+[92mINFO [0m:      Received: evaluate message 9400158f-d5dd-42b1-8821-9618524502cf
+[92mINFO [0m:      Sent reply
+[92mINFO [0m:
+[92mINFO [0m:      Received: reconnect message 115a37db-f46e-4114-81b8-9027f4e39d52
+[92mINFO [0m:      Disconnect and shut down
